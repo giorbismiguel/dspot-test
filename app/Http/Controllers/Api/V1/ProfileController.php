@@ -7,9 +7,17 @@ use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\ProfileResource;
 use App\Models\Profile;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
+    private ProfileService $profileService;
+
+    public function __construct(ProfileService $profileService)
+    {
+        $this->profileService = $profileService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,16 +29,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreProfileRequest  $request
@@ -38,7 +36,9 @@ class ProfileController extends Controller
      */
     public function store(StoreProfileRequest $request)
     {
-        //
+        $profile = $this->profileService->create($request);
+
+        return new ProfileResource($profile);
     }
 
     /**
@@ -49,18 +49,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Profile $profile)
-    {
-        //
+        return new ProfileResource($profile);
     }
 
     /**
@@ -72,7 +61,9 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request, Profile $profile)
     {
-        //
+        $profile = $this->profileService->update($request, $profile);
+
+        return new ProfileResource($profile);
     }
 
     /**
@@ -83,6 +74,6 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
-        //
+        return $this->profileService->destroy($profile->id);
     }
 }
