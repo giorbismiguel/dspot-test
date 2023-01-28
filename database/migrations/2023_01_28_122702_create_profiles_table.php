@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('state', 50)->nullable();
             $table->string('zipcode', 20)->nullable();
             $table->boolean('available')->default(false);
-            $table->json('friends')->nullable();
+            $table->foreignId('friend_id');
             $table->timestamps();
         });
     }

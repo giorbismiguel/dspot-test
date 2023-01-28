@@ -39,7 +39,7 @@ class UpdateProfileRequest extends FormRequest
             'state' => 'nullable|string|max:50',
             'zipcode' => 'nullable|string|max:20',
             'available' => 'boolean',
-            'friends' => 'nullable|array',
+            'friend_id' => 'nullable|array',
         ];
     }
 }

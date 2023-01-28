@@ -25,7 +25,7 @@ class ProfileResource extends JsonResource
             'state' => $this->state,
             'zipcode' => $this->zipcode,
             'available' => $this->available,
-            'friends' => $this->friends,
+            'friend_id' => $this->friend_id,
         ];
     }
 }

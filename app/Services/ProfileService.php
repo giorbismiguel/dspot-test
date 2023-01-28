@@ -19,7 +19,7 @@ class ProfileService
             'state' => $request->state,
             'zipcode' => $request->zipcode,
             'available' => $request->available,
-            'friends' => $request->friends,
+            'friend_id' => $request->friend_id,
         ]);
 
         return $profile;
@@ -41,7 +41,7 @@ class ProfileService
         $profile->state = $request->state;
         $profile->zipcode = $request->zipcode;
         $profile->available = $request->available;
-        $profile->friends = $request->friends;
+        $profile->friend_id = $request->friend_id;
 
         $profile->save();
 
