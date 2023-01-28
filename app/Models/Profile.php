@@ -9,7 +9,6 @@ class Profile extends Model
 {
     use HasFactory;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +24,7 @@ class Profile extends Model
         'state',
         'zipcode',
         'available',
-        'friends'
+        'friends',
     ];
 
     /**

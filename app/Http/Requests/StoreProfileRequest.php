@@ -33,7 +33,7 @@ class StoreProfileRequest extends FormRequest
             'state' => 'nullable|string|max:50',
             'zipcode' => 'nullable|string|max:20',
             'available' => 'boolean',
-            'friends' => 'nullable|array'
+            'friends' => 'nullable|array',
         ];
     }
 }
