@@ -24,10 +24,10 @@ class StoreProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'img' => 'nullable|string|url|max:255',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|max:20|unique:profiles',
+            'img' => 'nullable|string|url|max:255',
             'address' => 'nullable|string|max:25',
             'city' => 'nullable|string|max:50',
             'state' => 'nullable|string|max:50',
