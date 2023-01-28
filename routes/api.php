@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ProfileFriendsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::name('api.v1.')->prefix('v1')->group(function () {
     Route::apiResource('profiles', \App\Http\Controllers\Api\V1\ProfileController::class);
+
+    Route::get('profiles/friends/{profile}', [ProfileFriendsController::class, 'friends']);
+
+    Route::get('profiles/shorter/connection/{firstProfile}/{secondProfile}', [ProfileFriendsController::class, 'shorterConnection']);
 });
