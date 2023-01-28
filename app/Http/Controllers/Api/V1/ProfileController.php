@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return new ProfileResource(Profile::paginate());
+        return ProfileResource::collection(Profile::paginate());
     }
 
     /**

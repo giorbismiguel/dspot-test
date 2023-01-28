@@ -18,6 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::name('api.v1')->prefix('v1')->group(function () {
+Route::name('api.v1.')->prefix('v1')->group(function () {
     Route::apiResource('profiles', \App\Http\Controllers\Api\V1\ProfileController::class);
 });
