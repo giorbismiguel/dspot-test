@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('phone', 20);
-            $table->string('address');
-            $table->string('city', 50);
-            $table->string('state', 50);
-            $table->string('zipcode', 20);
-            $table->boolean('available');
-            $table->json('friends');
+            $table->string('address')->nullable();
+            $table->string('city', 50)->nullable();
+            $table->string('state', 50)->nullable();
+            $table->string('zipcode', 20)->nullable();
+            $table->boolean('available')->default(false);
+            $table->json('friends')->nullable();
             $table->timestamps();
         });
     }
