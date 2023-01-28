@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('state', 50);
             $table->string('zipcode', 20);
             $table->boolean('available');
+            $table->json('friends');
             $table->timestamps();
         });
     }

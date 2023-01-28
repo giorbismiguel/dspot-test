@@ -25,6 +25,7 @@ class Profile extends Model
         'state',
         'zipcode',
         'available',
+        'friends'
     ];
 
     /**
