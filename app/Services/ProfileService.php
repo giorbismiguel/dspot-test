@@ -43,6 +43,8 @@ class ProfileService
         $profile->available = $request->available;
         $profile->friends = $request->friends;
 
-        return $profile->save();
+        $profile->save();
+
+        return $profile;
     }
 }

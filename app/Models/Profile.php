@@ -35,7 +35,7 @@ class Profile extends Model
      */
     protected $casts = [
         'available' => 'boolean',
-        'friends' => 'data',
+        'friends' => 'array',
     ];
 
     /**
