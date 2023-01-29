@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,7 @@ class Profile extends Model
         'state',
         'zipcode',
         'available',
-        'friend_id',
+        'friends',
     ];
 
     /**
@@ -34,15 +35,19 @@ class Profile extends Model
      */
     protected $casts = [
         'available' => 'boolean',
+        'friends' => 'array',
     ];
 
-    public function friend()
+    /**
+     * Get the user's friends.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function friends(): Attribute
     {
-        return $this->belongsToOne(Profile::class, 'friend_id');
-    }
-
-    public function friends()
-    {
-        return $this->hasMany(Profile::class, 'friend_id')->orderBy('id', 'asc');
+        return Attribute::make(
+            get: fn ($value) => json_decode($value, true),
+            set: fn ($value) => json_encode($value),
+        );
     }
 }

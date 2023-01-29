@@ -19,7 +19,7 @@ class ProfileService
             'state' => $request->state,
             'zipcode' => $request->zipcode,
             'available' => $request->available,
-            'friend_id' => $request->friend_id,
+            'friends' => $request->friends,
         ]);
 
         return $profile;
