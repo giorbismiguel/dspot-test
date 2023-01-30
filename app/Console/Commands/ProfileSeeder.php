@@ -29,22 +29,33 @@ class ProfileSeeder extends Command
     public function handle()
     {
         $profilesTotal = $this->argument('profilesTotal');
-
         $friendsTotal = $this->argument('friendsTotal');
+
+        if (! intval($profilesTotal)) {
+            $this->error('Invalid argument profilesTotal');
+
+            return;
+        }
+
+        if (! intval($friendsTotal)) {
+            $this->error('Invalid argument friendsTotal');
+
+            return;
+        }
 
         Profile::truncate();
 
         $this->info('Creating profiles...');
 
-        $profiles = Profile::factory()->count($profilesTotal)->create();    
+        $profiles = Profile::factory()->count($profilesTotal)->create();
 
         $this->info('Profiles created successfully.');
 
         $this->info('Creating friends connections...');
-        
-        foreach($profiles as $profile) {
+
+        foreach ($profiles as $profile) {
             $connectionsIds = [];
-            for($i = 0 ; $i < $friendsTotal ; $i++){
+            for ($i = 0; $i < $friendsTotal; $i++) {
                 $connectionsIds[] = rand(0, $profilesTotal);
             }
 
