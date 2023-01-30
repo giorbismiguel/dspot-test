@@ -17,7 +17,16 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'img' => fake()->image,
+            'first_name' => fake()->name(),
+            'last_name' => fake()->lastName(),
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'city' => fake()->city(),
+            'state' => fake()->state(),
+            'zipcode' => fake()->postcode(),
+            'available' => fake()->boolean(),
+            'friends' => [],
         ];
     }
 }
