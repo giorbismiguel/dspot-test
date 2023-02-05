@@ -9,6 +9,13 @@ use App\Services\ProfileFriendsService;
 
 class ProfileFriendsController extends Controller
 {
+    private ProfileFriendsService $profileFriendsService;
+
+    public function __construct(ProfileFriendsService $profileFriendsService)
+    {
+        $this->profileFriendsService = $profileFriendsService;
+    }
+
     /**
      * Display the specified resource.
      *
@@ -17,7 +24,9 @@ class ProfileFriendsController extends Controller
      */
     public function friends(Profile $profile)
     {
-        return ProfileResource::collection($profile->friends);
+        $friends = $this->profileFriendsService->getFriendsById($profile->friends);
+
+        return ProfileResource::collection($friends);
     }
 
     /**
@@ -26,9 +35,9 @@ class ProfileFriendsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function shorterConnection(Profile $firstProfile, Profile $secondProfile, ProfileFriendsService $profileFriendsService)
+    public function shorterConnection(Profile $firstProfile, Profile $secondProfile)
     {
-        $shorter = $profileFriendsService->getConnections($firstProfile, $secondProfile, []);
+        $shorter = $this->profileFriendsService->getConnections($firstProfile, $secondProfile, []);
 
         return response()->json([
             'shorter' => $shorter,

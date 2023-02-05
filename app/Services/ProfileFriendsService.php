@@ -1,16 +1,26 @@
 <?php
 
-   namespace App\Services;
+namespace App\Services;
 
 use App\Models\Profile;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection;
 
-   class ProfileFriendsService {
+class ProfileFriendsService
+{
+    public function getFriendsById(array $ids): Collection | EloquentCollection
+    {
+        if ($ids) {
+            return Profile::whereIn('id', $ids)->get();
+        }
 
+        return collect([]);
+    }
 
-    public function getConnections($firstProfile, $secondProfile, $connections)
+    public function getConnections(Profile $firstProfile, Profile $secondProfile, array $connections): array
     {
         foreach ($firstProfile->friends as $friendId) {
-            $connections[] = $this->_getShorterConnection($friendId, $secondProfile, []);
+            $connections[] = $this->getShorterConnection($friendId, $secondProfile, []);
         }
 
         $minConnection = [];
@@ -29,7 +39,7 @@ use App\Models\Profile;
         return $minConnection;
     }
 
-    private function _getShorterConnection($id, $secondProfile, $connections)
+    private function getShorterConnection(int $id, Profile $secondProfile, array $connections): array
     {
         $secondProfileId = $secondProfile->id;
         if ($id === $secondProfileId) {
@@ -41,8 +51,8 @@ use App\Models\Profile;
         $friends = $profile->friends;
         if ($friends) {
             foreach ($friends as $friendId) {
-                return $this->_getShorterConnection($friendId, $secondProfile, $connections);
+                return $this->getShorterConnection($friendId, $secondProfile, $connections);
             }
         }
     }
-   }
+}
