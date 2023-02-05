@@ -28,7 +28,7 @@ class StoreProfileRequest extends FormRequest
             'last_name' => 'required|string|max:50',
             'phone' => 'required|string|max:20|unique:profiles',
             'img' => 'nullable|string|url|max:255',
-            'address' => 'nullable|string|max:25',
+            'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:50',
             'state' => 'nullable|string|max:50',
             'zipcode' => 'nullable|string|max:20',

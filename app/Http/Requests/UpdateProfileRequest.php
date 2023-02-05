@@ -34,7 +34,7 @@ class UpdateProfileRequest extends FormRequest
                 'max:20',
                 Rule::unique('profiles')->ignore($this->profile->id),
             ],
-            'address' => 'nullable|string|max:25',
+            'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:50',
             'state' => 'nullable|string|max:50',
             'zipcode' => 'nullable|string|max:20',
